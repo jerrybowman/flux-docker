@@ -13,7 +13,7 @@ Execute the `./build.sh` file to build the local docker image. You can use `dock
 
 Change to the `local` folder. Run the `./compose_run.sh` script. This will do the following:
 
-1. Start a postgresql database server, 
+1. Start a postgresql database server
 2. Initialize the Flux tables
 3. Start a Flux engine
 4. Start a Flux console
@@ -48,7 +48,7 @@ To delete all the containers (and stop them if they are still running) type the 
 
 `docker-compose down` 
 
-This will not delete the database data and it will still be there when you restart. If you want to clean out the database data to completely restart, type the following command (while the system is stopped, of course:
+This will not delete the database data and it will still be there when you restart. If you want to clean out the database data to completely restart, type the following command (while the system is stopped), of course:
 
 `rm -fr pgdata/*`
 
