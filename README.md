@@ -24,13 +24,13 @@ The logs will display to stdout and you can see `flux_console_1` and `flux_engin
 
 You can run multiple Flux engines when the system is started. The host names for the engines must be put into the `local/config/opsconsole8.properties` file. Each engine's host name is of the following format `local_flux-engine_n` where `n` is the engine number starting from '1'. This repository delivers this file with 3 engine definitions, so you can run 1-3 engines without any changes.
 
-To run multiple engines, preceed the `./compose.sh` command with an environment value of `ENGINES`. For example, the following will start 3 engines:
+To run multiple engines, preceed the `./compose_run.sh` command with an environment value of `ENGINES`. For example, the following will start 3 engines:
 
-`ENGINES=3 ./compose.sh`
+`ENGINES=3 ./compose_run.sh`
 
 You can also detach the running engines to free up the console, but it is nice to not do this so you can easily see the stdout messages. If you want to detach, simply add `RUN_DETACHED=1` on the command line as follows:
 
-`ENGINES=3 RUN_DETACHED=1 ./compose.sh`
+`ENGINES=3 RUN_DETACHED=1 ./compose_run.sh`
 
 If you detach and still want to see the log messages, you can run:
 
@@ -40,7 +40,7 @@ and the log messages will be displayed.
 
 ## Stopping the system
 
-To stop, simply type `docker-compose stop`. To start back up, run the `./compose.sh` script with number of engines specified again.
+To stop, simply type `docker-compose stop`. To start back up, run the `./compose_run.sh` script with number of engines specified again.
 
 ## Cleaning out and starting all over
 
