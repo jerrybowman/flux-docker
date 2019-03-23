@@ -1,15 +1,13 @@
 ARG jre_image_version=8-jre
-FROM openjdk:8-jre
+FROM openjdk:$jre_image_version
 
 ARG flux_version=8-0-13
 ENV flux_version=$flux_version
 
-LABEL flux/flux-base \
+LABEL flux-version=$flux_version \
       author=jerry.bowman@gmail.com
 
-#ENV SYSTEM_PACKAGES="software-properties-common apt-transport-https ca-certificates"
 ENV UTIL_PACKAGES="man unzip vim"
-#  apt-get install -y $SYSTEM_PACKAGES && \
 
 # Install prereqs and setup apt 
 RUN \
@@ -23,7 +21,6 @@ RUN \
     useradd --shell /bin/bash -u 1001 -o -c "" -m user && \
     mkdir -p /home/user
 
-# chown -hR user:user /home/user
 USER user
 WORKDIR /home/user
 ENV HOME=/home/user
