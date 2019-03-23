@@ -4,7 +4,6 @@ services:
     flux-postgres:
         image: bitnami/postgresql:9.6.12
         environment:
-            - POSTGRESQL_DATABASE=flux80
             - POSTGRESQL_PASSWORD=flux
         volumes:
             - ./pgdata:/bitnami
