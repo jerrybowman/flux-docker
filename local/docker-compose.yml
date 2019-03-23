@@ -7,7 +7,7 @@ services:
             - POSTGRESQL_PASSWORD=flux
         volumes:
             - ./pgdata:/bitnami
-            - ./sql:/docker-entrypoint-initdb.d/
+            - ./sql:/docker-entrypoint-initdb.d
         ports:
             - "5432:5432"
 
