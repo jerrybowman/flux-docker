@@ -7,10 +7,10 @@ SYSTEM=$(uname -m)
 echo $SYSTEM
 
 case $SYSTEM in
-	x86_64)
+    x86_64)
        TAG_SUFFIX=amd64-linux
        ;;
-	arm*)
+    arm*)
        TAG_SUFFIX=arm-linux
        ;;
     *)
