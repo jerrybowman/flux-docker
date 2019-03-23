@@ -1,0 +1,34 @@
+version: '2.1'
+services:
+
+    flux-postgres:
+        image: bitnami/postgresql:9.6.12
+        environment:
+            - POSTGRESQL_DATABASE=flux80
+            - POSTGRESQL_PASSWORD=flux
+        volumes:
+            - ./pgdata:/bitnami
+            - ./sql:/docker-entrypoint-initdb.d/
+        ports:
+            - "5432:5432"
+
+    flux-engine:
+        image: flux-amd64-linux:latest
+        environment:
+            - STARTUP_SLEEP=${STARTUP_SLEEP:-60}
+        volumes:
+            - ./config/engine-config.properties:/home/user/flux/config/engine-config.properties
+
+    flux-console:
+        image: flux-amd64-linux:latest
+        environment:
+            - RUN_CONSOLE="true"
+            - STARTUP_SLEEP=${STARTUP_SLEEP:-60}
+        volumes:
+            - ./config/opsconsole8.properties:/home/user/.flux/opsconsole8.properties
+        ports:
+            - "7186:7186"
+
+volumes:
+    flux_pgdata:
+
