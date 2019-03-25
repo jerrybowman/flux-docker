@@ -19,5 +19,9 @@ if [ -z ${ENGINES} ]; then
     ENGINES=1
 fi
 
+if [ -z ${AGENTS} ]; then
+    AGENTS=0
+fi
+
 export STARTUP_SLEEP=${DELAY} 
-docker-compose up --scale flux-engine=${ENGINES} ${DETACHED_PARM}
+docker-compose up --scale flux-engine=${ENGINES} --scale flux-agent=${AGENTS} ${DETACHED_PARM}

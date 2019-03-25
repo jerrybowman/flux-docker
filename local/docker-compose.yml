@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.2'
 services:
 
     flux-postgres:
@@ -17,6 +17,14 @@ services:
             - STARTUP_SLEEP=${STARTUP_SLEEP:-60}
         volumes:
             - ./config/engine-config.properties:/home/user/flux/config/engine-config.properties
+
+    flux-agent:
+        image: flux-amd64-linux:latest
+        environment:
+            - RUN_AGENT="true"
+            - STARTUP_SLEEP=${STARTUP_SLEEP:-60}
+        volumes:
+            - ./config/agent-config.properties:/home/user/flux/config/agent-config.template
 
     flux-console:
         image: flux-amd64-linux:latest

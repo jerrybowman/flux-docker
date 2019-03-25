@@ -9,6 +9,8 @@ a downloaded copy, it should be named `flux-<version>.zip`. Edit the build.sh fi
 
 Execute the `./build.sh` file to build the local docker image. You can use `docker image ls | grep flux` to see the newly built image. It will have two tags, `latest` and `<version>`.
 
+**Note: It is recommended that you run the build anytime you pickup changes from this repository (via a `git pull`) as some changes to make everything work may have been made to the build scripts.**
+
 ## Run the Flux system
 
 Change to the `local` folder. Run the `./compose_run.sh` script. This will do the following:
@@ -22,13 +24,21 @@ The logs will display to stdout and you can see `flux_console_1` and `flux_engin
 
 ## Options when running the system
 
-You can run multiple Flux engines when the system is started. The host names for the engines must be put into the `local/config/opsconsole8.properties` file. Each engine's host name is of the following format `local_flux-engine_n` where `n` is the engine number starting from '1'. This repository delivers this file with 3 engine definitions, so you can run 1-3 engines without any changes.
+You can run multiple Flux engines when the system is started. ~~The host names for the engines must be put into the `local/config/opsconsole8.properties` file. Each engine's host name is of the following format `local_flux-engine_n` where `n` is the engine number starting from '1'. This repository delivers this file with 3 engine definitions, so you can run 1-3 engines without any changes.~~ There are now no changes needed to the `opsconsole8.properties` file. Bring up as many engines as you want and it will find them due to the magic of docker-compose scaling.
 
 To run multiple engines, preceed the `./compose_run.sh` command with an environment value of `ENGINES`. For example, the following will start 3 engines:
 
 `ENGINES=3 ./compose_run.sh`
 
-You can also detach the running engines to free up the console, but it is nice to not do this so you can easily see the stdout messages. If you want to detach, simply add `RUN_DETACHED=1` on the command line as follows:
+To run agents, preceed the `./compose_run.sh` command with an environment value of `AGENTS`. For example, the following will start 3 engines and 5 agents:
+
+`ENGINES=3 AGENTS=5 ./compose_run.sh`
+
+By default, one engine and no agents are started. The following starts the default of one engine and 5 agents.
+
+`AGENTS=5 ./compose_run.sh`
+
+You can also detach the running containers to free up the console, but it is nice to not do this so you can easily see the stdout messages. If you want to detach, simply add `RUN_DETACHED=1` on the command line as follows:
 
 `ENGINES=3 RUN_DETACHED=1 ./compose_run.sh`
 
@@ -40,7 +50,7 @@ and the log messages will be displayed.
 
 ## Stopping the system
 
-To stop, simply type `docker-compose stop`. To start back up, run the `./compose_run.sh` script with number of engines specified again.
+To stop, simply type `docker-compose stop`. To start back up, run the `./compose_run.sh` script with number of engines (and possibly number of agents) specified again.
 
 ## Cleaning out and starting all over
 
