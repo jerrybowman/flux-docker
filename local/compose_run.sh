@@ -8,12 +8,14 @@ fi
 # been initialized. But also allow the user to pick a delay value to override the defaults.
 
 if [ -z ${DELAY} ]; then
-    if [ -f pgdata/postgresql/.initialized ]; then
-        DELAY=10
-    else
+	TEST=$(docker volume ls | grep local_flux_pgdata)
+    if [ -z $TEST ]; then
         DELAY=60
+    else
+        DELAY=10
     fi
 fi
+echo "DELAY:" $DELAY
 
 if [ -z ${ENGINES} ]; then
     ENGINES=1

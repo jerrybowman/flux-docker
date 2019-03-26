@@ -2,12 +2,12 @@ version: '2.2'
 services:
 
     flux-postgres:
-        image: bitnami/postgresql:9.6.12
+        image: postgres:9.6.12-alpine
         environment:
-            - POSTGRESQL_PASSWORD=flux
+            - POSTGRES_PASSWORD=flux
         volumes:
-            - ./pgdata:/bitnami
             - ./sql:/docker-entrypoint-initdb.d
+            - flux_pgdata:/var/lib/postgresql/data
         ports:
             - "5432:5432"
 
@@ -35,6 +35,12 @@ services:
             - ./config/opsconsole8.properties:/home/user/.flux/opsconsole8.properties
         ports:
             - "7186:7186"
+
+    # flux-pgdata:
+    #     image: busybox
+    #     volumes:
+    #     - ./pgdata:/bitnami
+    #     command: ["sh", "-c", "chown -R 1001:1001 /bitnami"]
 
 volumes:
     flux_pgdata:
